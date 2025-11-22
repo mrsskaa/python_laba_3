@@ -1,20 +1,19 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
+from src.fibonacci import fibo
+from src.fibonacci import fibo_recursive
+from src.factorial import factorial
+from src.factorial import factorial_recursive
+from src.sorting import bubble_sort
+from src.sorting import quick_sort
 
 
-def main() -> None:
-    """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-    :return: Данная функция ничего не возвращает
-    """
+if __name__ == '__main__':
+    print(fibo(5))
+    print(fibo_recursive(5))
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
 
-    result = power_function(target=target, power=degree)
+    print(factorial(5))
+    print(factorial_recursive(5))
 
-    print(result)
 
-    print(SAMPLE_CONSTANT)
-
-if __name__ == "__main__":
-    main()
+    print(bubble_sort([1, 4, 2, 1, 5, 8]))
+    print(quick_sort([1, 4, 2, 1, 5, 8], 0, 5))
