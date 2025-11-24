@@ -170,7 +170,7 @@ def bucket_sort(a: List[Union[int, float]], buckets: Optional[int] = None) -> Op
 
     for i in a:
         if type(i) is str:
-            raise NotStringError("You can't input string")
+            raise NotStringError("You can't input string ")
 
 
     if buckets is None:
