@@ -1,4 +1,4 @@
-from src.errors import BucketError, NotString, BadType, Empty
+from src.errors import BucketError, NotStringError, BadTypeError, EmptyError, DigitisNotNaturalNumberError
 from collections import Counter
 from typing import Union, List, cast, Optional
 
@@ -9,13 +9,13 @@ def bubble_sort(a: List[Union[int, float, str]]) -> Optional[List[Union[int, flo
     :return: отсортированный массив или None (если ошибка)
     """
     if len(a) == 0:
-        raise Empty("Empty Array")
+        raise EmptyError("Empty Array")
 
 
     if type(a[0]) is str:
         for i in a:
             if type(i) is not str:
-                raise BadType("there are different types in the same array")
+                raise BadTypeError("there are different types in the same array")
         a_str = cast(List[str], a)
         for i in range(len(a_str)):
             swap = False
@@ -29,7 +29,7 @@ def bubble_sort(a: List[Union[int, float, str]]) -> Optional[List[Union[int, flo
     else:
         for i in a:
             if type(i) is str:
-                raise BadType("there are different types in the same array")
+                raise BadTypeError("there are different types in the same array")
         a_num = cast(List[Union[int, float]], a)
 
     for i in range(len(a_num)):
@@ -54,13 +54,13 @@ def quick_sort(a: List[Union[int, float, str]], start: int, finish: int) -> Opti
     :return: отсортированный массив или None (если ошибка)
     """
     if len(a) == 0:
-        raise Empty("Empty Array")
+        raise EmptyError("Empty Array")
 
 
     if type(a[0]) is str:
         for i in a:
             if type(i) is not str:
-                raise BadType("there are different types in the same array")
+                raise BadTypeError("there are different types in the same array")
         a_str = cast(List[str], a)
         if start < finish:
             pivot_str = a_str[finish]
@@ -80,7 +80,7 @@ def quick_sort(a: List[Union[int, float, str]], start: int, finish: int) -> Opti
     else:
         for i in a:
             if type(i) is str:
-                raise BadType("there are different types in the same array")
+                raise BadTypeError("there are different types in the same array")
         a_num = cast(List[Union[int, float]], a)
 
         if start < finish:
@@ -107,12 +107,12 @@ def counting_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]
     :return: отсортированный массив или None (если ошибка)
     """
     if len(a) == 0:
-        raise Empty("Empty Array")
+        raise EmptyError("Empty Array")
 
 
     for i in a:
         if type(i) is str:
-            raise NotString("You can't input string")
+            raise NotStringError("You can't input string")
 
 
     d = Counter(a)
@@ -133,12 +133,12 @@ def radix_sort(a: List[int], base: int = 10) -> Optional[List[int]]:
     :return: отсортированный массив или None (если ошибка)
     """
     if len(a) == 0:
-        raise Empty("Empty Array")
+        raise EmptyError("Empty Array")
 
 
     for i in a:
-        if type(i) is str:
-            raise NotString("You can't input string")
+        if type(i) is str or type(i) is float or i<0:
+            raise DigitisNotNaturalNumberError("n must be int")
 
 
     mx = len(str(max(a)))
@@ -165,12 +165,12 @@ def bucket_sort(a: List[Union[int, float]], buckets: Optional[int] = None) -> Op
     :return: отсортированный массив или None (если ошибка)
     """
     if len(a) == 0:
-        raise Empty("Empty Array")
+        raise EmptyError("Empty Array")
 
 
     for i in a:
         if type(i) is str:
-            raise NotString("You can't input string")
+            raise NotStringError("You can't input string")
 
 
     if buckets is None:
@@ -248,11 +248,11 @@ def heap_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]]]:
     :return: отсортированный массив или None (если ошибка)
     """
     if len(a) == 0:
-        raise Empty("Empty Array")
+        raise EmptyError("Empty Array")
 
     for i in a:
         if type(i) is str:
-            raise NotString("You can't input string")
+            raise NotStringError("You can't input string")
 
     build_max_heap(a)
 

@@ -7,32 +7,72 @@ from typing import List, Union, cast
 def main() -> None:
     n = int(input())
 
+    try:
+        print("n-й член Фибоначчи итерационно:", fibo(n))
+    except Exception as error:
+        print(error)
 
-    print(fibo(n))
-    print(fibo_recursive(n))
+
+    try:
+        print("n-й член Фибоначчи рекурсивно:", fibo_recursive(n))
+    except Exception as error:
+        print(error)
 
 
-    print(factorial(n))
-    print(factorial_recursive(n))
+    try:
+        print("Факториал числа n итерационно:", factorial(n))
+    except Exception as error:
+        print(error)
+
+
+    try:
+        print("Факториал числа n рекурсивно:", factorial_recursive(n))
+    except Exception as error:
+        print(error)
+
+
 
 
     a = list(map(int, input().split()))
-
     a_union = cast(List[Union[int, float, str]], a)
-    print(bubble_sort(a_union))
+
+    try:
+        print("Сортировка пузырьком:", bubble_sort(a_union))
+    except Exception as error:
+        print(error)
 
     start = int(input())
     finish = int(input())
 
-    print(quick_sort(a_union, start, finish))
+    try:
+        print("Быстрая сортировка:", quick_sort(a_union, start, finish))
+    except Exception as error:
+        print(error)
+
     a_num = cast(List[Union[int, float]], a)
-    print(counting_sort(a_num))
-    print(radix_sort(a))
+
+    try:
+        print("Сортировка подсчетом:", counting_sort(a_num))
+    except Exception as error:
+        print(error)
+
+    try:
+        print("Поразрядная сортировка:", radix_sort(a))
+    except Exception as error:
+        print(error)
 
     buckets = int(input())
 
-    print(bucket_sort(a_num, buckets))
-    print(heap_sort(a_num))
+    try:
+        print("Блочная сортировка:", bucket_sort(a_num, buckets))
+    except Exception as error:
+        print(error)
+
+    try:
+        print("Сортировка кучей:", heap_sort(a_num))
+    except Exception as error:
+        print(error)
+
 
 
 if __name__ == '__main__':

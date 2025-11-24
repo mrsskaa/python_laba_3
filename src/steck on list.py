@@ -1,5 +1,5 @@
 from typing import Union
-from src.errors import Empty
+from src.errors import EmptyError
 
 class Stack:
     def __init__(self) -> None:
@@ -33,7 +33,7 @@ class Stack:
         :return: последний элемент стека, который удалили или None (если ошибка - стек пустой)
         """
         if self.is_empty():
-            raise Empty("Stack is empty")
+            raise EmptyError("Stack is empty")
         else:
             return self.items.pop()
 
@@ -44,7 +44,7 @@ class Stack:
         :return: элемент в конце стека или None (если ошибка - стек пустой)
         """
         if self.is_empty():
-            raise Empty("Stack is empty")
+            raise EmptyError("Stack is empty")
         else:
             return self.items[-1]
 

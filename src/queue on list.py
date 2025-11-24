@@ -1,5 +1,5 @@
 from typing import Union
-from src.errors import Empty
+from src.errors import EmptyError
 
 class Queue:
     def __init__(self) -> None:
@@ -33,7 +33,7 @@ class Queue:
         :return: первый элемент очереди, который удалили или None (если ошибка - очередь пустая)
         """
         if self.is_empty():
-            raise Empty("Queue is empty")
+            raise EmptyError("Queue is empty")
         else:
             return self.items.pop(0)
 
@@ -52,6 +52,6 @@ class Queue:
         :return: элемент в начале очереди None (если ошибка - очередь пустая)
         """
         if self.is_empty():
-            raise Empty("Queue is empty")
+            raise EmptyError("Queue is empty")
         else:
             return self.items[0]

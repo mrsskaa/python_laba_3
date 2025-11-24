@@ -1,11 +1,18 @@
+from src.errors import DigitisNotNaturalNumberError
+
+
 def fibo(n: int) -> int:
     """
-    Функция считает n-й член последовательности Фибоначчи с помощью цикла while
+    Функция считает n-й член последовательности Фибоначчи итеративно
     :param n: индекс члена последовательности
     :return: n-й член последовательности
     """
-    if n<=2:
+    if n < 0 or type(n) is float or type(n) is str:
+        raise DigitisNotNaturalNumberError("n must be int")
+
+    elif n<=2:
         return n
+
     else:
         first = 1
         second = 1
@@ -24,11 +31,15 @@ def fibo(n: int) -> int:
 
 def fibo_recursive(n: int) -> int:
     """
-    Функция считает n-й член последовательности Фибоначчи с помощью рекурсии
+    Функция считает n-й член последовательности Фибоначчи рекурсивно
     :param n: индекс члена последовательности
     :return: n-й член последовательности
     """
-    if n <= 2:
+    if n < 0 or type(n) is float or type(n) is str:
+        raise DigitisNotNaturalNumberError("n must be int")
+
+    elif n <= 2:
         return 1
 
-    return fibo_recursive(n-1) + fibo_recursive(n-2)
+    else:
+        return fibo_recursive(n-1) + fibo_recursive(n-2)

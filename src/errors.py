@@ -1,11 +1,14 @@
 class BucketError(Exception):
     pass
 
-class NotString(Exception):
+class NotStringError(Exception):
     pass
 
-class BadType(Exception):
+class BadTypeError(Exception):
     pass
 
-class Empty(Exception):
+class EmptyError(Exception):
+    pass
+
+class DigitisNotNaturalNumberError(Exception):
     pass
