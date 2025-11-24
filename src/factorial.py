@@ -1,4 +1,9 @@
 def factorial(n: int) -> int:
+    """
+    Функция считает n! с помощью цикла while
+    :param n: число, факториал которого надо посчитать
+    :return: n!
+    """
     if n == 0:
         return 1
     else:
@@ -9,6 +14,11 @@ def factorial(n: int) -> int:
         return ans
 
 def factorial_recursive(n: int) -> int:
+    """
+    Функция считает n! с помощью рекурсии
+    :param n: число, факториал которого надо посчитать
+    :return: n!
+    """
     if n == 0:
         return 1
     else:
