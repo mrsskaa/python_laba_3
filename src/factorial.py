@@ -1,4 +1,4 @@
-from src.errors import DigitisNotNaturalNumberError
+from src.errors import DigitIsNotNaturalNumberError
 
 
 def factorial(n: int) -> int:
@@ -8,7 +8,7 @@ def factorial(n: int) -> int:
     :return: n!
     """
     if n < 0 or type(n) is float or type(n) is str:
-        raise DigitisNotNaturalNumberError("n must be int")
+        raise DigitIsNotNaturalNumberError("n must be int")
 
     elif n == 0:
         return 1
@@ -27,7 +27,7 @@ def factorial_recursive(n: int) -> int:
     :return: n!
     """
     if n < 0 or type(n) is float or type(n) is str:
-        raise DigitisNotNaturalNumberError("n must be int")
+        raise DigitIsNotNaturalNumberError("n must be int")
 
     elif n == 0:
         return 1

@@ -1,8 +1,6 @@
 import pytest
-import importlib
 from src.errors import EmptyError
-steck_module = importlib.import_module('src.steck on list')
-Stack = steck_module.Stack
+from src.stack_on_list import Stack
 
 
 def test_stack_init():

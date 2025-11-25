@@ -10,5 +10,14 @@ class BadTypeError(Exception):
 class EmptyError(Exception):
     pass
 
-class DigitisNotNaturalNumberError(Exception):
+class DigitIsNotNaturalNumberError(Exception):
+    pass
+
+class IncorrectSortingNameError(Exception):
+    pass
+
+class IncorrectCommandError(Exception):
+    pass
+
+class IncorrectWayError(Exception):
     pass

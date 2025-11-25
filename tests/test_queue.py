@@ -1,8 +1,6 @@
 import pytest
-import importlib
 from src.errors import EmptyError
-queue_module = importlib.import_module('src.queue on list')
-Queue = queue_module.Queue
+from src.queue_on_list import Queue
 
 
 def test_queue_init():

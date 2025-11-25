@@ -1,4 +1,4 @@
-from src.errors import BucketError, NotStringError, BadTypeError, EmptyError, DigitisNotNaturalNumberError
+from src.errors import BucketError, NotStringError, BadTypeError, EmptyError, DigitIsNotNaturalNumberError
 from collections import Counter
 from typing import Union, List, cast, Optional
 
@@ -138,7 +138,7 @@ def radix_sort(a: List[int], base: int = 10) -> Optional[List[int]]:
 
     for i in a:
         if type(i) is str or type(i) is float or i<0:
-            raise DigitisNotNaturalNumberError("n must be int")
+            raise DigitIsNotNaturalNumberError("n must be int")
 
 
     mx = len(str(max(a)))

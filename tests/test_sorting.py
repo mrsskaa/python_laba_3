@@ -1,6 +1,6 @@
 import pytest
 from src.sorting import bubble_sort, quick_sort, bucket_sort, radix_sort, counting_sort, heap_sort
-from src.errors import BucketError, EmptyError, BadTypeError, NotStringError, DigitisNotNaturalNumberError
+from src.errors import BucketError, EmptyError, BadTypeError, NotStringError, DigitIsNotNaturalNumberError
 
 
 def test_bubble_sort():
@@ -51,7 +51,7 @@ def test_radix_sort():
     with pytest.raises(EmptyError):
         radix_sort([])
 
-    with pytest.raises(DigitisNotNaturalNumberError):
+    with pytest.raises(DigitIsNotNaturalNumberError):
         radix_sort([1, 2, 'a', 3])
         radix_sort([3.5, 1.2, 4.7, 2.1])
         radix_sort([1, 2, 3, -1])

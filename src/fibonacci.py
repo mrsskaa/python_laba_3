@@ -1,4 +1,4 @@
-from src.errors import DigitisNotNaturalNumberError
+from src.errors import DigitIsNotNaturalNumberError
 
 
 def fibo(n: int) -> int:
@@ -8,7 +8,7 @@ def fibo(n: int) -> int:
     :return: n-й член последовательности
     """
     if n < 0 or type(n) is float or type(n) is str:
-        raise DigitisNotNaturalNumberError("n must be int")
+        raise DigitIsNotNaturalNumberError("n must be int")
 
     elif n<=2:
         return n
@@ -36,7 +36,7 @@ def fibo_recursive(n: int) -> int:
     :return: n-й член последовательности
     """
     if n < 0 or type(n) is float or type(n) is str:
-        raise DigitisNotNaturalNumberError("n must be int")
+        raise DigitIsNotNaturalNumberError("n must be int")
 
     elif n <= 2:
         return 1
