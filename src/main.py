@@ -7,6 +7,10 @@ from src.stack_on_list import Stack
 from src.queue_on_list import Queue
 
 def main() -> None:
+    """
+    Обязательная составляющая программы. Является точкой входа в приложение
+    :return: Данная функция ничего не возвращает
+    """
     print("Введите команду")
     command = str(input())
 
