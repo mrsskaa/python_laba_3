@@ -1,8 +1,8 @@
+from typing import cast
 from src.errors import BucketError, NotStringError, BadTypeError, EmptyError, DigitIsNotNaturalNumberError
 from collections import Counter
-from typing import Union, List, cast, Optional
 
-def bubble_sort(a: List[Union[int, float, str]]) -> Optional[List[Union[int, float, str]]]:
+def bubble_sort(a: list[int | float | str]) -> list[int | float | str]:
     """
     Функция реализует сортировку пузырьком
     :param a: исходный массив
@@ -12,40 +12,30 @@ def bubble_sort(a: List[Union[int, float, str]]) -> Optional[List[Union[int, flo
         raise EmptyError("Empty Array")
 
 
-    if type(a[0]) is str:
+    if isinstance(a[0], str):
         for i in a:
-            if type(i) is not str:
+            if not isinstance(i, str):
                 raise BadTypeError("there are different types in the same array")
-        a_str = cast(List[str], a)
-        for i in range(len(a_str)):
-            swap = False
-            for j in range(1, len(a_str)-i):
-                if a_str[j] < a_str[j-1]:
-                    a_str[j], a_str[j-1] = a_str[j-1], a_str[j]
-                    swap = True
-            if not swap:
-                break
-        return cast(List[Union[int, float, str]], a_str)
     else:
         for i in a:
-            if type(i) is str:
+            if isinstance(i, str):
                 raise BadTypeError("there are different types in the same array")
-        a_num = cast(List[Union[int, float]], a)
 
-    for i in range(len(a_num)):
+
+    for i in range(len(a)):
         swap = False
-        for j in range(1, len(a_num)-i):
-            if a_num[j] < a_num[j-1]:
-                a_num[j], a_num[j-1] = a_num[j-1], a_num[j]
+        for j in range(1, len(a)-i):
+            if cast(float, a[j]) < cast(float, a[j-1]):
+                a[j], a[j-1] = a[j-1], a[j]
                 swap = True
 
         if not swap:
             break
 
-    return cast(List[Union[int, float, str]], a_num)
+    return a
 
 
-def quick_sort(a: List[Union[int, float, str]], start: int, finish: int) -> Optional[List[Union[int, float, str]]]:
+def quick_sort(a: list[int | float | str], start: int, finish: int) ->  list[int | float | str]:
     """
     Функция реализует быструю сортировку
     :param a: исходный массив
@@ -57,50 +47,33 @@ def quick_sort(a: List[Union[int, float, str]], start: int, finish: int) -> Opti
         raise EmptyError("Empty Array")
 
 
-    if type(a[0]) is str:
+    if isinstance(a[0], str):
         for i in a:
-            if type(i) is not str:
+            if not isinstance(i, str):
                 raise BadTypeError("there are different types in the same array")
-        a_str = cast(List[str], a)
-        if start < finish:
-            pivot_str = a_str[finish]
-            i = start - 1
-
-            for j in range(start, finish):
-                if a_str[j] <= pivot_str:
-                    i += 1
-                    a_str[i], a_str[j] = a_str[j], a_str[i]
-
-            a_str[i + 1], a_str[finish] = a_str[finish], a_str[i + 1]
-
-            quick_sort(cast(List[Union[int, float, str]], a_str), start, i)
-            quick_sort(cast(List[Union[int, float, str]], a_str), i+2, finish)
-
-        return cast(List[Union[int, float, str]], a_str)
     else:
         for i in a:
-            if type(i) is str:
+            if isinstance(i, str):
                 raise BadTypeError("there are different types in the same array")
-        a_num = cast(List[Union[int, float]], a)
 
-        if start < finish:
-            pivot_num: Union[int, float] = a_num[finish]
-            i = start - 1
+    if start < finish:
+        pivot = a[finish]
+        i = start - 1
 
-            for j in range(start, finish):
-                if a_num[j] <= pivot_num:
-                    i += 1
-                    a_num[i], a_num[j] = a_num[j], a_num[i]
+        for j in range(start, finish):
+            if cast(float, a[j]) <= cast(float, pivot):
+                i += 1
+                a[i], a[j] = a[j], a[i]
 
-            a_num[i + 1], a_num[finish] = a_num[finish], a_num[i + 1]
+        a[i + 1], a[finish] = a[finish], a[i + 1]
 
-            quick_sort(cast(List[Union[int, float, str]], a_num), start, i)
-            quick_sort(cast(List[Union[int, float, str]], a_num), i+2, finish)
+        quick_sort(a, start, i)
+        quick_sort(a, i+2, finish)
 
-        return cast(List[Union[int, float, str]], a_num)
+    return a
 
 
-def counting_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]]]:
+def counting_sort(a:  list[int | float]) -> list[int | float]:
     """
     Функция реализует сортировку подсчетом
     :param a: исходный массив
@@ -111,7 +84,7 @@ def counting_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]
 
 
     for i in a:
-        if type(i) is str:
+        if isinstance(i, str):
             raise NotStringError("You can't input string")
 
 
@@ -125,7 +98,7 @@ def counting_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]
     return ans
 
 
-def radix_sort(a: List[int], base: int = 10) -> Optional[List[int]]:
+def radix_sort(a: list[int], base: int = 10) -> list[int]:
     """
     Функция реализует поразрядную сортировку
     :param a: исходный массив
@@ -137,14 +110,14 @@ def radix_sort(a: List[int], base: int = 10) -> Optional[List[int]]:
 
 
     for i in a:
-        if type(i) is str or type(i) is float or i<0:
+        if isinstance(i, str) or isinstance(i, float) or i<0:
             raise DigitIsNotNaturalNumberError("n must be int")
 
 
     mx = len(str(max(a)))
 
     for x in range(mx):
-        backet: List[List[int]] = [[] for _ in range(base)]
+        backet = cast(list[list[int]], [[] for _ in range(base)])
         for i in range(len(a)):
             backet[(a[i] // base**x)%base].append(a[i])
 
@@ -157,7 +130,7 @@ def radix_sort(a: List[int], base: int = 10) -> Optional[List[int]]:
 
     return a
 
-def bucket_sort(a: List[Union[int, float]], buckets: Optional[int] = None) -> Optional[List[Union[int, float]]]:
+def bucket_sort(a: list[int | float], buckets: int | None) -> list[int | float]:
     """
     Функция реализует блочную сортировку
     :param a: исходный массив
@@ -169,7 +142,7 @@ def bucket_sort(a: List[Union[int, float]], buckets: Optional[int] = None) -> Op
 
 
     for i in a:
-        if type(i) is str:
+        if isinstance(i, str):
             raise NotStringError("You can't input string ")
 
 
@@ -177,7 +150,7 @@ def bucket_sort(a: List[Union[int, float]], buckets: Optional[int] = None) -> Op
         buckets = len(a)
 
     if buckets >= 1:
-        bucket: List[List[Union[int, float]]] = [[] for _ in range(buckets)]
+        bucket = cast(list[list[int | float]], [[] for _ in range(buckets)])
         mx = max(a)
         mn = min(a)
 
@@ -193,22 +166,19 @@ def bucket_sort(a: List[Union[int, float]], buckets: Optional[int] = None) -> Op
             bucket[digit].append(a[i])
 
         cnt = 0
-        for bucket_list in bucket:
-            if bucket_list != []:
-                sorted_bucket = bubble_sort(cast(List[Union[int, float, str]], bucket_list))
-                if sorted_bucket is not None:
-                    sorted_bucket_num = cast(List[Union[int, float]], sorted_bucket)
-                    for j in sorted_bucket_num:
-                        a[cnt] = j
-                        cnt += 1
-
+        for current_bucket in bucket:
+            if current_bucket != []:
+                sorted_bucket = cast(list[int | float], bubble_sort(cast(list[int | float | str], current_bucket)))  # Изменил: добавил cast для аргумента
+                for j in sorted_bucket:
+                    a[cnt] = cast(int | float, j)
+                    cnt += 1
         return a
 
     else:
         raise BucketError("Bucket must be >0")
 
 
-def sift_down(a: List[Union[int, float]], start: int, heap_size: int) -> None:
+def sift_down(a:  list[int | float], start: int, heap_size: int) -> None:
     """
     Функция спускает элемент вниз по бинарной куче для восстановления ее свойства
     :param a: исходный массив
@@ -231,7 +201,7 @@ def sift_down(a: List[Union[int, float]], start: int, heap_size: int) -> None:
         start = largest
 
 
-def build_max_heap(a: List[Union[int, float]]) -> None:
+def build_max_heap(a: list[int | float]) -> None:
     """
     Функция строит максимальную кучу
     :param a: исходный массив
@@ -241,7 +211,7 @@ def build_max_heap(a: List[Union[int, float]]) -> None:
         sift_down(a, i, len(a))
 
 
-def heap_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]]]:
+def heap_sort(a:list[int | float]) -> list[int | float]:
     """
     Функция реализует сортировку кучей
     :param a: исходный массив
@@ -251,7 +221,7 @@ def heap_sort(a: List[Union[int, float]]) -> Optional[List[Union[int, float]]]:
         raise EmptyError("Empty Array")
 
     for i in a:
-        if type(i) is str:
+        if isinstance(i, str):
             raise NotStringError("You can't input string")
 
     build_max_heap(a)

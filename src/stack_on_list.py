@@ -15,7 +15,7 @@ class Stack:
         Функция проверяет, является ли стек пустым
         :return: True если стек пустой, False если нет
         """
-        return self.items == []
+        return not self.items
 
 
     def push(self, x: Union[int, float, str]) -> None:

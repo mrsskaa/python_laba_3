@@ -15,7 +15,7 @@ class Queue:
         Функция проверяет, является ли очередь пустой
         :return: True если очередь пустая, False если нет
         """
-        return self.items == []
+        return not self.items
 
 
     def enqueue(self, x: Union[int, float, str]) -> None:
