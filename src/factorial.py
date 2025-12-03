@@ -7,8 +7,11 @@ def factorial(n: int) -> int:
     :param n: число, факториал которого надо посчитать
     :return: n!
     """
-    if n < 0 or not isinstance(n, int):
-        raise DigitIsNotNaturalNumberError("n must be int")
+    if not isinstance(n, int):
+        raise DigitIsNotNaturalNumberError("n must be natural")
+
+    if n < 0:
+        raise DigitIsNotNaturalNumberError("n must be natural")
 
     if n == 0:
         return 1
@@ -26,8 +29,11 @@ def factorial_recursive(n: int) -> int:
     :param n: число, факториал которого надо посчитать
     :return: n!
     """
-    if n < 0 or not isinstance(n, int):
-        raise DigitIsNotNaturalNumberError("n must be int")
+    if not isinstance(n, int):
+        raise DigitIsNotNaturalNumberError("n must be natural")
+
+    if n < 0:
+        raise DigitIsNotNaturalNumberError("n must be natural")
 
     elif n == 0:
         return 1

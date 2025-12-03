@@ -1,7 +1,7 @@
 from src.fibonacci import fibo, fibo_recursive
 from src.factorial import factorial, factorial_recursive
 from src.sorting import bubble_sort, quick_sort, counting_sort,radix_sort, bucket_sort, heap_sort
-from typing import List, Union, cast
+from typing import cast
 from src.errors import IncorrectCommandError, IncorrectSortingNameError, IncorrectWayError
 from src.stack_on_list import Stack
 from src.queue_on_list import Queue
@@ -14,189 +14,180 @@ def main() -> None:
     print("Введите команду")
     command = str(input())
 
-    if command == "fibonacci":
-        print("Введите n")
-        n = int(input())
-        print("Введите способ подсчета iterations/recursive")
-        way = str(input())
+    match command:
+        case "fibonacci":
+            print("Введите n")
+            n = int(input())
+            print("Введите способ подсчета iterations/recursive")
+            way = str(input())
 
-        if way == "iterations":
-            try:
-                print("n-й член Фибоначчи итерационно:", fibo(n))
-            except Exception as error:
-                print(error)
+            match way:
+                case "iterations":
+                    try:
+                        print("n-й член Фибоначчи итерационно:", fibo(n))
+                    except Exception as error:
+                        print(error)
 
-        elif way == "recursive":
-            try:
-                print("n-й член Фибоначчи рекурсивно:", fibo_recursive(n))
-            except Exception as error:
-                print(error)
+                case "recursive":
+                    try:
+                        print("n-й член Фибоначчи рекурсивно:", fibo_recursive(n))
+                    except Exception as error:
+                        print(error)
 
-        else:
-            raise IncorrectWayError("Такого способа подсчета нет")
+                case _:
+                    raise IncorrectWayError("Такого способа подсчета нет")
 
+        case "factorial":
+            print("Введите n")
+            n = int(input())
+            print("Введите способ подсчета iterations/recursive")
+            way = str(input())
 
-    elif command == "factorial":
-        print("Введите n")
-        n = int(input())
-        print("Введите способ подсчета iterations/recursive")
-        way = str(input())
+            match way:
+                case "iterations":
+                    try:
+                        print("Факториал числа n итерационно:", factorial(n))
+                    except Exception as error:
+                        print(error)
 
-        if way == "iterations":
-            try:
-                print("Факториал числа n итерационно:", factorial(n))
-            except Exception as error:
-                print(error)
+                case "recursive":
+                    try:
+                        print("Факториал числа n рекурсивно:", factorial_recursive(n))
+                    except Exception as error:
+                        print(error)
 
-        elif way == "recursive":
-            try:
-                print("Факториал числа n рекурсивно:", factorial_recursive(n))
-            except Exception as error:
-                print(error)
+                case _:
+                    raise IncorrectWayError("Такого способа подсчета нет")
 
-        else:
-            raise IncorrectWayError("Такого способа подсчета нет")
-
-
-    elif command == "sorting":
-        print("Введите тип сортировки")
-        name = str(input())
-        print("Введите массив")
-        a = list(map(int, input().split()))
-        a_union = cast(List[Union[int, float, str]], a)
-
-        if name == "bubble":
-            try:
-                print("Сортировка пузырьком:", bubble_sort(a_union))
-            except Exception as error:
-                print(error)
-
-
-        elif name == "quick":
-            try:
-                print("Быстрая сортировка:", quick_sort(a_union, 0, len(a)-1))
-            except Exception as error:
-                print(error)
-
-
-        elif name == "count":
-            a_num = cast(List[Union[int, float]], a)
-
-            try:
-                print("Сортировка подсчетом:", counting_sort(a_num))
-            except Exception as error:
-                print(error)
-
-
-        elif name == "radix":
-            try:
-                print("Поразрядная сортировка:", radix_sort(a))
-            except Exception as error:
-                print(error)
-
-
-        elif name == "bucket":
+        case "sorting":
+            print("Введите тип сортировки")
+            name = str(input())
             print("Введите массив")
-            a_num = cast(List[Union[int, float]], a)
-            print("Введите количество блоков")
-            buckets = int(input())
+            a = list(map(int, input().split()))
+            a_union = cast(list[int | float | str], a)
 
-            try:
-                print("Блочная сортировка:", bucket_sort(a_num, buckets))
-            except Exception as error:
-                print(error)
+            match name:
+                case "bubble":
+                    try:
+                        print("Сортировка пузырьком:", bubble_sort(a_union))
+                    except Exception as error:
+                        print(error)
 
+                case "quick":
+                    try:
+                        print("Быстрая сортировка:", quick_sort(a_union, 0, len(a)-1))
+                    except Exception as error:
+                        print(error)
 
-        elif name == "heap":
-            print("Введите массив")
-            a_num = cast(List[Union[int, float]], a)
+                case "count":
+                    a_num = cast(list[int | float], a)
 
-            try:
-                print("Сортировка кучей:", heap_sort(a_num))
-            except Exception as error:
-                print(error)
+                    try:
+                        print("Сортировка подсчетом:", counting_sort(a_num))
+                    except Exception as error:
+                        print(error)
 
+                case "radix":
+                    try:
+                        print("Поразрядная сортировка:", radix_sort(a))
+                    except Exception as error:
+                        print(error)
 
-        else:
-            raise IncorrectSortingNameError("Такой тип сортировки не поддерживается")
+                case "bucket":
+                    print("Введите массив")
+                    a_num = cast(list[int | float], a)
+                    print("Введите количество блоков")
+                    buckets = int(input())
 
+                    try:
+                        print("Блочная сортировка:", bucket_sort(a_num, buckets))
+                    except Exception as error:
+                        print(error)
 
-    elif command == "stack":
-        stack = Stack()
+                case "heap":
+                    print("Введите массив")
+                    a_num = cast(list[int | float], a)
 
-        while True:
-            print("Введите команду стека")
-            choice = str(input())
+                    try:
+                        print("Сортировка кучей:", heap_sort(a_num))
+                    except Exception as error:
+                        print(error)
 
-            if choice == "push":
-                print("Введите значение для добавления")
-                x = input()
-                stack.push(x)
+                case _:
+                    raise IncorrectSortingNameError("Такой тип сортировки не поддерживается")
 
-            elif choice == "pop":
-                try:
-                    print(stack.pop())
-                except Exception as e:
-                    print(f"Ошибка: {e}")
+        case "stack":
+            stack = Stack()
 
-            elif choice == "peek":
-                try:
-                    value = stack.peek()
-                    print(f"Последний элемент стека: '{value}'")
-                except Exception as e:
-                    print(f"Ошибка: {e}")
+            while (choice := str(input("Введите команду стека\n"))) != 'exit':
+                match choice:
+                    case "push":
+                        print("Введите значение для добавления")
+                        x = input()
+                        stack.push(x)
 
-            elif choice == "len":
-                print(f"Размер стека: {len(stack)}")
+                    case "pop":
+                        try:
+                            print(stack.pop())
+                        except Exception as e:
+                            print(f"Ошибка: {e}")
 
-            elif choice == "is_empty":
-                if stack.is_empty():
-                    print("Стек пустой")
-                else:
-                    print("Стек не пустой")
+                    case "peek":
+                        try:
+                            value = stack.peek()
+                            print(f"Последний элемент стека: '{value}'")
+                        except Exception as e:
+                            print(f"Ошибка: {e}")
 
-            else:
-                print("Такой команды не существует")
+                    case "len":
+                        print(f"Размер стека: {len(stack)}")
 
-    elif command == "queue":
-        queue = Queue()
+                    case "is_empty":
+                        if stack.is_empty():
+                            print("Стек пустой")
+                        else:
+                            print("Стек не пустой")
 
-        while True:
-            print("Введите команду очереди")
-            choice = str(input())
+                    case _:
+                        print("Такой команды не существует")
 
-            if choice == "enqueue":
-                print("Введите значение для добавления")
-                x = input()
-                queue.enqueue(x)
+        case "queue":
+            queue = Queue()
 
-            elif choice == "dequeue":
-                try:
-                    print(queue.dequeue())
-                except Exception as e:
-                    print(f"Ошибка: {e}")
+            while (choice := str(input("Введите команду очереди\n"))) != 'exit':
+                match choice:
+                    case "enqueue":
+                        print("Введите значение для добавления")
+                        x = input()
+                        queue.enqueue(x)
 
-            elif choice == "front":
-                try:
-                    value = queue.front()
-                    print(f"Первый элемент очереди: '{value}'")
-                except Exception as e:
-                    print(f"Ошибка: {e}")
+                    case "dequeue":
+                        try:
+                            print(queue.dequeue())
+                        except Exception as e:
+                            print(f"Ошибка: {e}")
 
-            elif choice == "len":
-                print(f"Размер очереди: {len(queue)}")
+                    case "front":
+                        try:
+                            value = queue.front()
+                            print(f"Первый элемент очереди: '{value}'")
+                        except Exception as e:
+                            print(f"Ошибка: {e}")
 
-            elif choice == "is_empty":
-                if queue.is_empty():
-                    print("Очередь пустая")
-                else:
-                    print("Очередь не пустая")
+                    case "len":
+                        print(f"Размер очереди: {len(queue)}")
 
-            else:
-                raise IncorrectCommandError("Такой команды не существует")
+                    case "is_empty":
+                        if queue.is_empty():
+                            print("Очередь пустая")
+                        else:
+                            print("Очередь не пустая")
 
-    else:
-        raise IncorrectCommandError("Такой команды не существует")
+                    case _:
+                        raise IncorrectCommandError("Такой команды не существует")
+
+        case _:
+            raise IncorrectCommandError("Такой команды не существует")
 
 
 

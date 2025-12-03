@@ -1,4 +1,3 @@
-from typing import Union
 from src.errors import EmptyError
 
 class Queue:
@@ -7,7 +6,7 @@ class Queue:
         Функция инициализирует пустую очередь
         return: None
         """
-        self.items: list[Union[int, float, str]] = []
+        self.items: list[int | float | str] = []
 
 
     def is_empty(self) -> bool:
@@ -18,7 +17,7 @@ class Queue:
         return not self.items
 
 
-    def enqueue(self, x: Union[int, float, str]) -> None:
+    def enqueue(self, x: int | float | str) -> None:
         """
         Функция добавляет элемент в конец очереди
         :param x: элемент, который нужно добавить
@@ -27,7 +26,7 @@ class Queue:
         self.items.append(x)
 
 
-    def dequeue(self) -> Union[int, float, str]:
+    def dequeue(self) -> int | float | str:
         """
         Функция удаляет из начала очереди элемент и возвращает его
         :return: первый элемент очереди, который удалили или None (если ошибка - очередь пустая)
@@ -46,7 +45,7 @@ class Queue:
         return len(self.items)
 
 
-    def front(self) -> Union[int, float, str]:
+    def front(self) ->  int | float | str:
         """
         Функция возвращает элемент в начале очереди, но не удаляет его
         :return: элемент в начале очереди None (если ошибка - очередь пустая)

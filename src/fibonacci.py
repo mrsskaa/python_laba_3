@@ -7,11 +7,17 @@ def fibo(n: int) -> int:
     :param n: индекс члена последовательности
     :return: n-й член последовательности
     """
-    if n < 0 or not isinstance(n, int):
-        raise DigitIsNotNaturalNumberError("n must be int")
+    if not isinstance(n, int):
+        raise DigitIsNotNaturalNumberError("n must be natural")
+
+    if n < 0:
+        raise DigitIsNotNaturalNumberError("n must be natural")
+
+    elif n == 0:
+        return 0
 
     elif n <= 2:
-        return n
+        return 1
 
     first, second = 1, 1
     for i in range(2, n):
@@ -28,8 +34,14 @@ def fibo_recursive(n: int) -> int:
     :param n: индекс члена последовательности
     :return: n-й член последовательности
     """
-    if n < 0 or not isinstance(n, int):
-        raise DigitIsNotNaturalNumberError("n must be int")
+    if not isinstance(n, int):
+        raise DigitIsNotNaturalNumberError("n must be natural")
+
+    if n < 0:
+        raise DigitIsNotNaturalNumberError("n must be natural")
+
+    elif n == 0:
+        return 0
 
     elif n <= 2:
         return 1

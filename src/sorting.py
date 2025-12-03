@@ -2,6 +2,49 @@ from typing import cast
 from src.errors import BucketError, NotStringError, BadTypeError, EmptyError, DigitIsNotNaturalNumberError
 from collections import Counter
 
+def different_type(a: list[int | float | str]) -> bool:
+    """
+    Функция проверяет массив на наличие различных типов
+    :param a: исходный массив
+    :return: True (в массиве разные типы), False (нет)
+    """
+    if isinstance(a[0], str):
+        for i in a:
+            if not isinstance(i, str):
+                return True
+    else:
+        for i in a:
+            if isinstance(i, str):
+                return True
+
+    return False
+
+def string_in_array(a: list[int | float | str]) -> bool:
+    """
+    Функция проверяет массив на наличие элемента типа str
+    :param a: исходный массив
+    :return: True (в массиве есть str), False (нет)
+    """
+    for i in a:
+        if isinstance(i, str):
+            return True
+
+    return False
+
+
+def float_in_array(a: list[int | float | str]) -> bool:
+    """
+    Функция проверяет массив на наличие элемента типа float
+    :param a: исходный массив
+    :return: True (в массиве есть float), False (нет)
+    """
+    for i in a:
+        if isinstance(i, float):
+            return True
+
+    return False
+
+
 def bubble_sort(a: list[int | float | str]) -> list[int | float | str]:
     """
     Функция реализует сортировку пузырьком
@@ -12,14 +55,8 @@ def bubble_sort(a: list[int | float | str]) -> list[int | float | str]:
         raise EmptyError("Empty Array")
 
 
-    if isinstance(a[0], str):
-        for i in a:
-            if not isinstance(i, str):
-                raise BadTypeError("there are different types in the same array")
-    else:
-        for i in a:
-            if isinstance(i, str):
-                raise BadTypeError("there are different types in the same array")
+    if different_type(a):
+        raise BadTypeError("there are different types in the same array")
 
 
     for i in range(len(a)):
@@ -47,14 +84,8 @@ def quick_sort(a: list[int | float | str], start: int, finish: int) ->  list[int
         raise EmptyError("Empty Array")
 
 
-    if isinstance(a[0], str):
-        for i in a:
-            if not isinstance(i, str):
-                raise BadTypeError("there are different types in the same array")
-    else:
-        for i in a:
-            if isinstance(i, str):
-                raise BadTypeError("there are different types in the same array")
+    if different_type(a):
+        raise BadTypeError("there are different types in the same array")
 
     if start < finish:
         pivot = a[finish]
@@ -83,9 +114,8 @@ def counting_sort(a:  list[int | float]) -> list[int | float]:
         raise EmptyError("Empty Array")
 
 
-    for i in a:
-        if isinstance(i, str):
-            raise NotStringError("You can't input string")
+    if string_in_array(cast(list[int | float | str], a)):
+        raise NotStringError("You can't input string")
 
 
     d = Counter(a)
@@ -109,10 +139,12 @@ def radix_sort(a: list[int], base: int = 10) -> list[int]:
         raise EmptyError("Empty Array")
 
 
-    for i in a:
-        if isinstance(i, str) or isinstance(i, float) or i<0:
-            raise DigitIsNotNaturalNumberError("n must be int")
+    if string_in_array(cast(list[int | float | str], a)) or float_in_array(cast(list[int | float | str], a)):
+        raise DigitIsNotNaturalNumberError("n must be natural")
 
+    for i in a:
+        if i < 0:
+            raise DigitIsNotNaturalNumberError("n must be natural")
 
     mx = len(str(max(a)))
 
@@ -130,7 +162,7 @@ def radix_sort(a: list[int], base: int = 10) -> list[int]:
 
     return a
 
-def bucket_sort(a: list[int | float], buckets: int | None) -> list[int | float]:
+def bucket_sort(a: list[int | float], buckets: int | None = None) -> list[int | float]:
     """
     Функция реализует блочную сортировку
     :param a: исходный массив
@@ -141,9 +173,8 @@ def bucket_sort(a: list[int | float], buckets: int | None) -> list[int | float]:
         raise EmptyError("Empty Array")
 
 
-    for i in a:
-        if isinstance(i, str):
-            raise NotStringError("You can't input string ")
+    if string_in_array(cast(list[int | float | str], a)):
+        raise NotStringError("You can't input string")
 
 
     if buckets is None:
@@ -168,9 +199,9 @@ def bucket_sort(a: list[int | float], buckets: int | None) -> list[int | float]:
         cnt = 0
         for current_bucket in bucket:
             if current_bucket != []:
-                sorted_bucket = cast(list[int | float], bubble_sort(cast(list[int | float | str], current_bucket)))  # Изменил: добавил cast для аргумента
+                sorted_bucket = cast(list[int | float], bubble_sort(cast(list[int | float | str], current_bucket)))
                 for j in sorted_bucket:
-                    a[cnt] = cast(int | float, j)
+                    a[cnt] = j
                     cnt += 1
         return a
 
@@ -211,7 +242,7 @@ def build_max_heap(a: list[int | float]) -> None:
         sift_down(a, i, len(a))
 
 
-def heap_sort(a:list[int | float]) -> list[int | float]:
+def heap_sort(a: list[int | float]) -> list[int | float]:
     """
     Функция реализует сортировку кучей
     :param a: исходный массив
@@ -220,9 +251,8 @@ def heap_sort(a:list[int | float]) -> list[int | float]:
     if len(a) == 0:
         raise EmptyError("Empty Array")
 
-    for i in a:
-        if isinstance(i, str):
-            raise NotStringError("You can't input string")
+    if string_in_array(cast(list[int | float | str], a)):
+        raise NotStringError("You can't input string")
 
     build_max_heap(a)
 
