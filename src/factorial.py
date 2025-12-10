@@ -1,5 +1,5 @@
 from src.errors import DigitIsNotNaturalNumberError
-
+from functools import lru_cache
 
 def factorial(n: int) -> int:
     """
@@ -23,6 +23,7 @@ def factorial(n: int) -> int:
 
     return ans
 
+@lru_cache
 def factorial_recursive(n: int) -> int:
     """
     Функция считает n! рекурсивно

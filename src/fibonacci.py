@@ -1,4 +1,5 @@
 from src.errors import DigitIsNotNaturalNumberError
+from functools import lru_cache
 
 
 def fibo(n: int) -> int:
@@ -27,7 +28,7 @@ def fibo(n: int) -> int:
 
 
 
-
+@lru_cache
 def fibo_recursive(n: int) -> int:
     """
     Функция считает n-й член последовательности Фибоначчи рекурсивно
